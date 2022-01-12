@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +23,13 @@ public class ClientController {
         Page<ClientDto> clients = clientService.findAll(pageable);
         return ResponseEntity.ok().body(clients);
     }
+
+
+    @GetMapping("/{id}")
+    private ResponseEntity<ClientDto> findById(@PathVariable Long id) {
+        ClientDto clientDto = clientService.findById(id);
+        return ResponseEntity.ok().body(clientDto);
+    }
+
 
 }
