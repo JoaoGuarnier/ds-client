@@ -34,4 +34,20 @@ public class ClientService {
         return clientDto;
     }
 
+    @Transactional
+    public ClientDto save(ClientDto clientDto) {
+        Client entity = new Client();
+        convertDtoToEntity(clientDto,entity);
+        Client entitySaved = clientRepository.save(entity);
+        return new ClientDto(entitySaved);
+    }
+
+    private void convertDtoToEntity(ClientDto clientDto, Client entity) {
+        entity.setId(clientDto.getId());
+        entity.setCpf(clientDto.getCpf());
+        entity.setBirthDate(clientDto.getBirthDate());
+        entity.setIncome(clientDto.getIncome());
+        entity.setName(clientDto.getName());
+        entity.setChildren(clientDto.getChildren());
+    }
 }
