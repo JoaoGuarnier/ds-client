@@ -1,5 +1,6 @@
 package com.devsuperior.dsclient.dto;
 
+import com.devsuperior.dsclient.model.Client;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,5 +19,14 @@ public class ClientDto {
     private BigDecimal income;
     private LocalDate birthDate;
     private Integer children;
+
+    public ClientDto(Client entity) {
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.cpf = entity.getCpf();
+        this.income = entity.getIncome();
+        this.birthDate = entity.getBirthDate();
+        this.children = entity.getChildren();
+    }
 
 }
