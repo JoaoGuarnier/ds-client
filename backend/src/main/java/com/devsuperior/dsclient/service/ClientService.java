@@ -4,7 +4,10 @@ import com.devsuperior.dsclient.dto.ClientDto;
 import com.devsuperior.dsclient.model.Client;
 import com.devsuperior.dsclient.repository.ClientRepository;
 import com.devsuperior.dsclient.service.exceptions.ClientNotFoundException;
+import com.devsuperior.dsclient.service.exceptions.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -53,6 +56,18 @@ public class ClientService {
         } catch (EntityNotFoundException e) {
             throw new ClientNotFoundException("Id not found " + id);
         }
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        try {
+            clientRepository.deleteById(id);
+        }  catch (EmptyResultDataAccessException e) {
+            throw new DatabaseException("Id not found " + id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Integrity violation");
+        }
+
     }
 
 
