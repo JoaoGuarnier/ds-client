@@ -1,5 +1,6 @@
 package com.devsuperior.dsclient.tests;
 
+import com.devsuperior.dsclient.dto.ClientDto;
 import com.devsuperior.dsclient.model.Client;
 
 import java.math.BigDecimal;
@@ -16,4 +17,10 @@ public class Factory {
         return client;
     }
 
+    public static ClientDto createClientDto() {
+        Client client = createClient();
+        ClientDto clientDto = new ClientDto(client);
+        System.out.println(clientDto.getCpf());
+        return clientDto;
+    }
 }
