@@ -20,7 +20,6 @@ public class Factory {
     public static ClientDto createClientDto() {
         Client client = createClient();
         ClientDto clientDto = new ClientDto(client);
-        System.out.println(clientDto.getCpf());
         return clientDto;
     }
 }
