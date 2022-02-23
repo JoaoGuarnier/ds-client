@@ -1,7 +1,9 @@
 package com.devsuperior.dsclient.controller.exceptions;
 
+import com.devsuperior.dsclient.model.Role;
 import com.devsuperior.dsclient.service.exceptions.ClientNotFoundException;
 import com.devsuperior.dsclient.service.exceptions.DatabaseException;
+import com.devsuperior.dsclient.service.exceptions.RoleNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -21,6 +23,17 @@ public class ControllerExceptionHandler {
         standardError.setStatus(HttpStatus.NOT_FOUND.value());
         standardError.setError("Id not found");
         standardError.setMessage("Client not found");
+        standardError.setPath(request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(standardError);
+    }
+
+    @ExceptionHandler(RoleNotFoundException.class)
+    public ResponseEntity<StandardError> clientNotFound(RoleNotFoundException exception, HttpServletRequest request) {
+        StandardError standardError = new StandardError();
+        standardError.setTimestamp(LocalDateTime.now());
+        standardError.setStatus(HttpStatus.NOT_FOUND.value());
+        standardError.setError("Id not found");
+        standardError.setMessage("Role not found");
         standardError.setPath(request.getRequestURI());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(standardError);
     }

@@ -2,3 +2,13 @@ INSERT INTO TB_CLIENT (NAME,CPF,INCOME,CHILDREN,BIRTH_DATE) VALUES ('JOAO CARLOS
 INSERT INTO TB_CLIENT (NAME,CPF,INCOME,CHILDREN,BIRTH_DATE) VALUES ('LEBRON JAMES', '12311536988', 2, 3, TO_DATE('15/12/1985', 'dd/MM/yyyy'))
 INSERT INTO TB_CLIENT (NAME,CPF,INCOME,CHILDREN,BIRTH_DATE) VALUES ('RUBY', '66625741523', 15000, 0, TO_DATE('05/01/1994', 'dd/MM/yyyy'))
 INSERT INTO TB_CLIENT (NAME,CPF,INCOME,CHILDREN,BIRTH_DATE) VALUES ('SCRIM', '85236974115', 15000, 0, TO_DATE('23/09/1991', 'dd/MM/yyyy'))
+
+INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('Alex', 'Brown', 'alex@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG')
+INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('Maria', 'Green', 'maria@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG')
+
+INSERT INTO tb_role (authority) VALUES ('ROLE_OPERATOR')
+INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN')
+
+INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1)
+INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 1)
+INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 2)
