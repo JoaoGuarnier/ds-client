@@ -20,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +36,9 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
 
     @Transactional(readOnly = true)
@@ -55,6 +59,7 @@ public class UserService implements UserDetailsService {
     public UserDto save(UserInsertDto userInsertDto) {
         User entity = new User();
         convertDtoToEntity(userInsertDto, entity);
+        entity.setPassword(encoder.encode(userInsertDto.getPassword()));
         User entitySaved = userRepository.save(entity);
         return new UserDto(entitySaved);
     }
